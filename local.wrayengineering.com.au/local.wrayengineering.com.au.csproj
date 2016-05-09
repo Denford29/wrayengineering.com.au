@@ -328,7 +328,17 @@
     <Content Include="Config\trees.config" />
     <Content Include="Config\umbracoSettings.config" />
     <Content Include="Config\UrlRewriting.config" />
+    <Content Include="Css\bootstrap.css" />
+    <Content Include="Css\styles.css" />
+    <Content Include="Images\Gears.jpg" />
+    <Content Include="Images\Wray_Engineering.png" />
+    <Content Include="Images\wray_engineering_Home.jpg" />
+    <Content Include="Images\wray_engineering_Home1.jpg" />
+    <Content Include="Images\wray_engineering_Home2.jpg" />
+    <Content Include="Images\wray_engineering_Home3.jpg" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\jquery.js" />
     <Content Include="Umbraco\assets\fonts\helveticons\helveticons.eot" />
     <Content Include="Umbraco\assets\fonts\helveticons\helveticons.ttf" />
     <Content Include="Umbraco\assets\fonts\helveticons\helveticons.woff" />
@@ -464,6 +474,8 @@
     <Content Include="Views\Web.config" />
     <Content Include="bin\local.wrayengineering.com.au.dll.config" />
     <Content Include="bin\Optimus.dll.config" />
+    <Content Include="Views\HomePage.cshtml" />
+    <Content Include="Views\SiteMaster.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
