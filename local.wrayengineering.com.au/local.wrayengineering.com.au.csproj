@@ -14,7 +14,7 @@
     <RootNamespace>local.wrayengineering.com.au</RootNamespace>
     <AssemblyName>local.wrayengineering.com.au</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -476,6 +476,14 @@
     <Content Include="bin\Optimus.dll.config" />
     <Content Include="Views\HomePage.cshtml" />
     <Content Include="Views\SiteMaster.cshtml" />
+    <Content Include="Views\ContactPage.cshtml" />
+    <Content Include="Views\StandardTextPage.cshtml" />
+    <Content Include="Views\Partials\Home\Slider.cshtml" />
+    <Content Include="Views\Partials\Master\footer.cshtml" />
+    <Content Include="Views\Partials\Master\MainHeader.cshtml" />
+    <Content Include="Views\Partials\Master\MainNavigation.cshtml" />
+    <Content Include="Views\Partials\Master\Specialities.cshtml" />
+    <Content Include="Views\Partials\Master\HeaderContent.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3060,7 +3068,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>21965</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:21965/</IISUrl>
+          <IISUrl>http://local.wrayengineering.com.au/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
