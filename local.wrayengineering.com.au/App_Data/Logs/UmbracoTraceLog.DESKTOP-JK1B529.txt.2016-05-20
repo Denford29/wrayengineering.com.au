@@ -1,0 +1,18 @@
+﻿ 2016-05-20 01:51:25,086 [P17380/D2/T605] INFO  umbraco.BusinessLogic.Log - Log scrubbed.  Removed all items older than 2016-05-19 01:51:25
+ 2016-05-20 05:51:25,200 [P17380/D2/T571] INFO  umbraco.BusinessLogic.Log - Log scrubbed.  Removed all items older than 2016-05-19 05:51:25
+ 2016-05-20 09:51:25,269 [P17380/D2/T590] INFO  umbraco.BusinessLogic.Log - Log scrubbed.  Removed all items older than 2016-05-19 09:51:25
+ 2016-05-20 10:33:01,413 [P17380/D2/T436] INFO  Umbraco.Web.Scheduling.BackgroundTaskRunner - [ScheduledPublishing] Terminating
+ 2016-05-20 10:33:01,413 [P17380/D2/T436] INFO  Umbraco.Web.Scheduling.BackgroundTaskRunner - [ScheduledPublishing] Waiting for tasks to complete
+ 2016-05-20 10:33:01,413 [P17380/D2/T376] INFO  Umbraco.Web.Scheduling.BackgroundTaskRunner - [ScheduledPublishing] Tasks completed, terminated
+ 2016-05-20 10:33:01,476 [P17380/D2/T436] INFO  Umbraco.Web.Scheduling.BackgroundTaskRunner - [KeepAlive] Terminating
+ 2016-05-20 10:33:01,476 [P17380/D2/T436] INFO  Umbraco.Web.Scheduling.BackgroundTaskRunner - [KeepAlive] Waiting for tasks to complete
+ 2016-05-20 10:33:01,476 [P17380/D2/T366] INFO  Umbraco.Web.Scheduling.BackgroundTaskRunner - [KeepAlive] Tasks completed, terminated
+ 2016-05-20 10:33:01,476 [P17380/D2/T436] INFO  Umbraco.Web.Scheduling.BackgroundTaskRunner - [Umbraco.Web.Scheduling.IBackgroundTask] Terminating
+ 2016-05-20 10:33:01,476 [P17380/D2/T436] INFO  Umbraco.Web.Scheduling.BackgroundTaskRunner - [Umbraco.Web.Scheduling.IBackgroundTask] Waiting for tasks to complete
+ 2016-05-20 10:33:01,476 [P17380/D2/T436] INFO  Umbraco.Web.Scheduling.BackgroundTaskRunner - [LogScrubber] Terminating
+ 2016-05-20 10:33:01,476 [P17380/D2/T436] INFO  Umbraco.Web.Scheduling.BackgroundTaskRunner - [LogScrubber] Waiting for tasks to complete
+ 2016-05-20 10:33:01,476 [P17380/D2/T436] INFO  Umbraco.Web.Scheduling.BackgroundTaskRunner - [ScheduledTasks] Terminating
+ 2016-05-20 10:33:01,476 [P17380/D2/T436] INFO  Umbraco.Web.Scheduling.BackgroundTaskRunner - [ScheduledTasks] Waiting for tasks to complete
+ 2016-05-20 10:33:01,476 [P17380/D2/T374] INFO  Umbraco.Web.Scheduling.BackgroundTaskRunner - [Umbraco.Web.Scheduling.IBackgroundTask] Tasks completed, terminated
+ 2016-05-20 10:33:01,476 [P17380/D2/T374] INFO  Umbraco.Web.Scheduling.BackgroundTaskRunner - [ScheduledTasks] Tasks completed, terminated
+ 2016-05-20 10:33:01,476 [P17380/D2/T590] INFO  Umbraco.Web.Scheduling.BackgroundTaskRunner - [LogScrubber] Tasks completed, terminated

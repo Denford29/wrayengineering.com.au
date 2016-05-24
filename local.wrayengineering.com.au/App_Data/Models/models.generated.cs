@@ -375,6 +375,113 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 	}
 
+	/// <summary>Site Details</summary>
+	[PublishedContentModel("SiteDetails")]
+	public partial class SiteDetails : GlobalSettings
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "SiteDetails";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public SiteDetails(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<SiteDetails, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Default Key Words
+		///</summary>
+		[ImplementPropertyType("defaultKeyWords")]
+		public string DefaultKeyWords
+		{
+			get { return this.GetPropertyValue<string>("defaultKeyWords"); }
+		}
+
+		///<summary>
+		/// Default Meta Description
+		///</summary>
+		[ImplementPropertyType("defaultMetaDescription")]
+		public string DefaultMetaDescription
+		{
+			get { return this.GetPropertyValue<string>("defaultMetaDescription"); }
+		}
+
+		///<summary>
+		/// Facebook Page
+		///</summary>
+		[ImplementPropertyType("facebookPage")]
+		public string FacebookPage
+		{
+			get { return this.GetPropertyValue<string>("facebookPage"); }
+		}
+
+		///<summary>
+		/// Main Header Logo: Logo image used on the header section.
+		///</summary>
+		[ImplementPropertyType("rightHeaderLogo")]
+		public object RightHeaderLogo
+		{
+			get { return this.GetPropertyValue("rightHeaderLogo"); }
+		}
+
+		///<summary>
+		/// Site Address
+		///</summary>
+		[ImplementPropertyType("siteAddress")]
+		public string SiteAddress
+		{
+			get { return this.GetPropertyValue<string>("siteAddress"); }
+		}
+
+		///<summary>
+		/// Site Email Address
+		///</summary>
+		[ImplementPropertyType("siteEmailAddress")]
+		public string SiteEmailAddress
+		{
+			get { return this.GetPropertyValue<string>("siteEmailAddress"); }
+		}
+
+		///<summary>
+		/// Site Name
+		///</summary>
+		[ImplementPropertyType("siteName")]
+		public string SiteName
+		{
+			get { return this.GetPropertyValue<string>("siteName"); }
+		}
+
+		///<summary>
+		/// Site Phone Number
+		///</summary>
+		[ImplementPropertyType("sitePhoneNumber")]
+		public string SitePhoneNumber
+		{
+			get { return this.GetPropertyValue<string>("sitePhoneNumber"); }
+		}
+
+		///<summary>
+		/// Twitter Page
+		///</summary>
+		[ImplementPropertyType("twitterPage")]
+		public string TwitterPage
+		{
+			get { return this.GetPropertyValue<string>("twitterPage"); }
+		}
+	}
+
 	/// <summary>Folder</summary>
 	[PublishedContentModel("Folder")]
 	public partial class Folder : PublishedContentModel
