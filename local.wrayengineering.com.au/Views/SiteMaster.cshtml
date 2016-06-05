@@ -7,12 +7,16 @@
     <link href="/Css/bootstrap.css" rel="stylesheet">
     <link href="/Css/styles.css" rel="stylesheet">
 
+    @*@Styles.Render("~/bundles/sitecss")*@
+
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
 
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
 
@@ -30,13 +34,17 @@
 
     @Html.Partial("Master/footer")
 
-    <script src="/Scripts/jquery.js"></script>
-    <script src="/Scripts/bootstrap.js"></script>
+    @*<script src="/Scripts/jquery.js"></script>
+        <script src="/Scripts/bootstrap.js"></script>*@
+
+    @Scripts.Render("~/bundles/sitescripts")
 
     <script>
-        $('.carousel').carousel({
-            interval: 5000 //changes the speed
-        })
+        $('.carousel')
+            .carousel({
+                interval: 5000 //changes the speed
+            })
     </script>
+
 </body>
 </html>

@@ -1,19 +1,65 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@inherits UmbracoTemplatePage
 @{
+    var siteDefaultName = "Wray Engineering Ltd ";
+    var siteAddress = "Unit 2/41 Byre Avenue |Somerton Park, SA | (08) 8294 1897";
+    var detailsAddress = "";
+    var detailsPhone = "";
+    var imageUrl = "/Images/Wray_Engineering_Logo.png";
+    
+    var siteSetting = Umbraco.TypedContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "GlobalSettings");
+
+    if (siteSetting != null && siteSetting.Id > 0 && siteSetting.Descendants("SiteDetails").Any())
+        {
+        var siteDetailsPage = siteSetting.Descendants("SiteDetails").FirstOrDefault();
+        if (siteDetailsPage != null && siteDetailsPage.Id > 0)
+            {
+            if (siteDetailsPage.HasProperty("siteName") && siteDetailsPage.HasValue("siteName"))
+                {
+                siteDefaultName = siteDetailsPage.GetPropertyValue("siteName").ToString();
+                }
+            if (siteDetailsPage.HasProperty("siteAddress") && siteDetailsPage.HasValue("siteAddress"))
+                {
+                detailsAddress = siteDetailsPage.GetPropertyValue("siteAddress").ToString();
+                }
+            if (siteDetailsPage.HasProperty("sitePhoneNumber") && siteDetailsPage.HasValue("sitePhoneNumber"))
+                {
+                detailsPhone = siteDetailsPage.GetPropertyValue("sitePhoneNumber").ToString();
+                }
+            if (siteDetailsPage.HasProperty("rightHeaderLogo") && siteDetailsPage.HasValue("rightHeaderLogo"))
+                {
+                var mediaItem = Umbraco.TypedMedia(siteDetailsPage.GetPropertyValue("rightHeaderLogo").ToString());
+                if (mediaItem != null && mediaItem.Id > 0)
+                    {
+                    imageUrl = !string.IsNullOrEmpty(mediaItem.GetCropUrl("Logo")) ? mediaItem.GetCropUrl("Logo") : mediaItem.GetCropUrl(200, 78);
+                    }
+                }
+            }
+        }
+
+    if (!string.IsNullOrEmpty(detailsAddress))
+        {
+        siteAddress = detailsAddress;
+        }
+
+    if (!string.IsNullOrEmpty(detailsPhone))
+        {
+        siteAddress = siteAddress + " | " + detailsPhone;
+        }
+
     <div class="container box">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-lg-12">
                 <div class="brand">
-                    <a href="#">
-                        <img src="/Images/Wray_Engineering.png" alt="Wray Engineering" width="200" height="78">
-                        <span class="brandHeading">
-                            Wray Engineering
+                    <a href="/">
+                        <img src="@imageUrl" alt="@siteDefaultName">
+                        <span class="brandHeading hidden-sm hidden-xs">
+                            @siteDefaultName
                         </span>
                     </a>
                 </div>
             </div>
-            <div class="col-md-12">
-                <div class="address-bar">Unit 2/41 Byre Avenue |Somerton Park, SA | (08) 8294 1897</div>
+            <div class="col-lg-12">
+                <div class="address-bar">@siteAddress</div>
             </div>
         </div>
     </div>

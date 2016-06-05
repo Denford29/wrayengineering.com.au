@@ -4,58 +4,32 @@
 
     @Html.Partial("Home/Slider")
 
-    <div class="row">
-        <div class="box">
+    var pageHeading = Model.Content.Name;
+    if (Model.Content.HasProperty("pageHeading") && Model.Content.HasValue("pageHeading"))
+        {
+        pageHeading = Model.Content.GetPropertyValue("pageHeading").ToString();
+        }
+        <div class="row">
+            <div class="box">
 
-            <div class="row">
-                <div class="col-md-12">
-                    <hr>
-                    <h2 class="intro-text text-center">
-                        About Wray Engineering...
-                    </h2>
-                    <hr>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-7">
-                    <p>
-                        We are a family run engineering company that specialises in Fabrications, Fittings, 
-                        Engineers Machining and General Maintenance and are based in South Australia , Adelaide, Somerton Park.
-                    </p>
-                    
-                </div>
-                <div class="col-md-5">
-                    <!--Facebook script - Start -->
-                    <div id="fb-root"></div>
-                    <script>
-                            (function(d, s, id) {
-                                var js, fjs = d.getElementsByTagName(s)[0];
-                                if (d.getElementById(id)) return;
-                                js = d.createElement(s);
-                                js.id = id;
-                                js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5&appId=825414407581475";
-                                fjs.parentNode.insertBefore(js, fjs);
-                            }(document, 'script', 'facebook-jssdk'));
-                    </script>
-                    <!--Facebook script - End -->
-                    <!--<hr>
-                    <h4 class="intro-text text-center">
-                        Visit our Facebook Page
-                    </h4>
-                    <hr>-->
-                    <div class="fb-page"
-                         data-href="www.facebook.com/Wray-Engineering-887489801367413"
-                         data-tabs="timeline"
-                         data-width="450"
-                         data-height="400"
-                         data-small-header="false"
-                         data-adapt-container-width="true"
-                         data-hide-cover="false" data-show-facepile="false">
-
+                    <div class="col-lg-12">
+                        <hr>
+                        <h2 class="intro-text text-center">
+                            @pageHeading
+                        </h2>
+                        <hr>
                     </div>
-                </div>
+
+                    <div class="col-md-7">
+                        @if (Model.Content.HasProperty("bodyText") && Model.Content.HasValue("bodyText"))
+                            {
+                                @Html.Raw(Model.Content.GetPropertyValue("bodyText"))
+                            }
+                    </div>
+                    <div class="col-md-5">
+                        @Html.Partial("Master/Facebook")
+                    </div>
             </div>
         </div>
-    </div>
 
 }

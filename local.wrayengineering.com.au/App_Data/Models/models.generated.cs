@@ -18,7 +18,7 @@ using Umbraco.Web;
 using Umbraco.ModelsBuilder;
 using Umbraco.ModelsBuilder.Umbraco;
 
-[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.2")]
+[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.5")]
 
 namespace Umbraco.Web.PublishedContentModels
 {
@@ -470,6 +470,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public string SitePhoneNumber
 		{
 			get { return this.GetPropertyValue<string>("sitePhoneNumber"); }
+		}
+
+		///<summary>
+		/// Site Specialties
+		///</summary>
+		[ImplementPropertyType("siteSpecialties")]
+		public Archetype.Models.ArchetypeModel SiteSpecialties
+		{
+			get { return this.GetPropertyValue<Archetype.Models.ArchetypeModel>("siteSpecialties"); }
 		}
 
 		///<summary>

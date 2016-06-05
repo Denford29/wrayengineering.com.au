@@ -1,0 +1,63 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    var siteFacebook = "www.facebook.com/Wray-Engineering-887489801367413";
+    var siteSetting = Umbraco.TypedContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "GlobalSettings");
+
+    if (siteSetting != null && siteSetting.Id > 0 && siteSetting.Descendants("SiteDetails").Any())
+        {
+        var siteDetailsPage = siteSetting.Descendants("SiteDetails").FirstOrDefault();
+        if (siteDetailsPage != null && siteDetailsPage.Id > 0)
+            {
+            if (siteDetailsPage.HasProperty("facebookPage") && siteDetailsPage.HasValue("facebookPage"))
+                {
+                siteFacebook = siteDetailsPage.GetPropertyValue("facebookPage").ToString();
+                }
+            }
+        }
+
+    <div class="visible-xs visible-sm text-center">
+        <div id="fb-root"></div>
+        <script>
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.6&appId=1675593639385754";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <hr/>
+        <h4 class="intro-text text-center">
+            Visit our Facebook Page
+        </h4>
+        <div class="fb-follow" data-href="@siteFacebook" data-layout="button" data-show-faces="false"></div>
+        <hr />
+    </div>
+
+    <div class="visible-md visible-lg">
+        <div id="fb-root"></div>
+        <script>
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s);
+                js.id = id;
+                js
+                    .src =
+                    "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5&appId=825414407581475";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <div class="fb-page "
+             data-href="@siteFacebook"
+             data-tabs="timeline"
+             @*data-width="450"*@
+             data-height="400"
+             data-small-header="false"
+             data-adapt-container-width="true"
+             data-hide-cover="false" data-show-facepile="false">
+        </div>
+    </div>
+
+}

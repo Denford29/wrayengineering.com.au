@@ -487,6 +487,15 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// Site Specialties
+		///</summary>
+		[ImplementPropertyType("siteSpecialties")]
+		public Archetype.Models.ArchetypeModel SiteSpecialties
+		{
+			get { return this.GetPropertyValue<Archetype.Models.ArchetypeModel>("siteSpecialties"); }
+		}
+
+		///<summary>
 		/// Twitter Page
 		///</summary>
 		[ImplementPropertyType("twitterPage")]

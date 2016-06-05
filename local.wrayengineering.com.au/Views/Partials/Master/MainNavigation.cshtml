@@ -1,8 +1,24 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@inherits UmbracoTemplatePage
 @{
+    var siteDefaultName = "Wray Engineering Ltd ";
+    var siteSetting = Umbraco.TypedContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "GlobalSettings");
+
+    if (siteSetting != null && siteSetting.Id > 0 && siteSetting.Descendants("SiteDetails").Any())
+    {
+        var siteDetailsPage = siteSetting.Descendants("SiteDetails").FirstOrDefault();
+        if (siteDetailsPage != null && siteDetailsPage.Id > 0)
+        {
+            if (siteDetailsPage.HasProperty("siteName") && siteDetailsPage.HasValue("siteName"))
+            {
+                siteDefaultName = siteDetailsPage.GetPropertyValue("siteName").ToString();
+            }
+        }
+    }
+
+    var homePage = Umbraco.TypedContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "HomePage");
+    
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
@@ -10,25 +26,44 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
-                <a class="navbar-brand" href="#">Wray Engineering</a>
+                <a class="navbar-brand" href="/">@siteDefaultName</a>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">Home</a>
-                    </li>
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
+            
+            @if (homePage != null && homePage.Id > 0)
+            {
+                var homeTitle = homePage.Name;
+                if (homePage.HasProperty("linkTittle") && homePage.HasValue("linkTittle"))
+                {
+                    homeTitle = homePage.GetPropertyValue("linkTittle").ToString();
+                }
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li @(homePage.Id == Model.Content.Id ? "class=active" : null)>
+                            <a href="@homePage.Url" title="@homeTitle - @siteDefaultName">
+                                @homeTitle
+                            </a>
+                        </li>
+
+                        @if (homePage.Children.Any())
+                            {
+                            foreach (var landingPage in homePage.Children.Where(childPage => childPage.IsVisible() && !childPage.GetPropertyValue<bool>("hideFromMenu")))
+                                {
+                                var pageTitle = landingPage.Name;
+                                if (landingPage.HasProperty("linkTittle") && landingPage.HasValue("linkTittle"))
+                                    {
+                                    pageTitle = landingPage.GetPropertyValue("linkTittle").ToString();
+                                    }
+
+                                <li @(landingPage.Id == Model.Content.Id ? "class=active" : Model.Content.AncestorOrSelf(2).Id == landingPage.Id ? "class=active" : null)>
+                                    <a href="@landingPage.Url" title="@pageTitle - @siteDefaultName">
+                                        @pageTitle
+                                    </a>
+                                </li>
+                                }
+                            }
+                    </ul>
+                </div>
+            }
         </div>
-        <!-- /.container -->
     </nav>
 }

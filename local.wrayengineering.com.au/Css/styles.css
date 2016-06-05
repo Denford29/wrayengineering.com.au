@@ -214,7 +214,156 @@ footer p {
         clear: both;
     }
 
-.fb-page.fb_iframe_widget
+.fb-page.fb_iframe_widget ,.fb-page.fb_iframe_widget span
 {
-    width: 100%;
+    width: 100% !important;
 }
+
+@media (min-width: 993px) and (max-width: 1200px) {
+    hr {
+        margin-bottom: 15px;
+        margin-top: 15px;
+    }
+
+    .brand, .address-bar {
+        text-align: center;
+    }
+
+    .navbar-nav {
+        font-size: 1.1em;
+    }
+
+    .nav > li > a {
+        padding: 15px;
+    }
+
+    .brand-name {
+        font-size: 3em;
+    }
+
+    p, .bodyContent li {
+        font-size: 1.1em;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    hr {
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+    .brand, .address-bar {
+        text-align: center;
+    }
+
+    .navbar-nav {
+        font-size: 1em;
+    }
+
+    .nav > li > a {
+        padding: 10px;
+    }
+
+    .brand-name {
+        font-size: 2em;
+    }
+
+    p, .bodyContent li {
+        font-size: 1em;
+    }
+
+    .box {
+        margin-bottom: 15px;
+        padding: 20px 10px;
+        background: #fff;
+    }
+
+    .mobileLocation {
+        text-align: center;
+    }
+
+    footer .row div {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 767px) {
+    /*body {
+        background-image: none;
+        background-color: #9e0301;
+        -ms-background-size: auto;
+        background-size: auto;
+    }*/
+
+    hr {
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+
+    .headerBox {
+        margin-bottom: 10px;
+        padding: 15px 10px;
+        background: #fff;
+    }
+
+    /*.brand, .address-bar {
+        display: none;
+    }*/
+
+    .navbar-default {
+        background: #fff;
+    }
+
+    .navbar-header {
+        display: block;
+    }
+
+    .navbar-default a.navbar-brand {
+        color: #000000;
+        text-transform: uppercase;
+        font-weight: 900;
+        letter-spacing: 2px;
+        font-family: "Josefin Sans",Helvetica,Arial,sans-serif;
+        font-size: 1.5em;
+    }
+
+    .brand-name {
+        font-size: 2.5em;
+    }
+
+    .navbar-nav {
+        display: block;
+        table-layout: auto;
+    }
+
+    .nav > li > a {
+        padding: 10px;
+    }
+
+    p, .bodyContent li {
+        font-size: 1em;
+    }
+
+    .box {
+        margin-bottom: 10px;
+        padding: 15px 10px;
+        background: #fff;
+    }
+
+    .mobileLocation {
+        text-align: center;
+    }
+
+    footer .row div {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+}
+
+/*@media (max-width: 500px) {
+    .navbar-default a.navbar-brand {
+        font-size: 1.5em;
+    }
+}*/
+

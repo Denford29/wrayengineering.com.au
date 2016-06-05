@@ -1,39 +1,56 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@using Archetype.Models
+@inherits UmbracoTemplatePage
 @{
-    <div class="row">
-        <div class="box">
-            <div class="col-md-12">
-                <hr>
-                <h2 class="intro-text text-center">
-                    Our Speciality includes...
-                </h2>
-                <hr>
-            </div>
-            <div class="col-sm-3 text-center">
-                <img class="img-responsive" src="/Images/wray_engineering_Home.jpg" alt="">
-                <h4>
-                    Fabrication
-                </h4>
-            </div>
-            <div class="col-sm-3 text-center">
-                <img class="img-responsive" src="/Images/wray_engineering_Home1.jpg" alt="">
-                <h4>
-                    Fitting
-                </h4>
-            </div>
-            <div class="col-sm-3 text-center">
-                <img class="img-responsive" src="/Images/wray_engineering_Home2.jpg" alt="">
-                <h4>
-                    Engineers Machining
-                </h4>
-            </div>
-            <div class="col-sm-3 text-center">
-                <img class="img-responsive" src="/Images/wray_engineering_Home3.jpg" alt="">
-                <h4>
-                    General & Maintenance
-                </h4>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
+    var siteSetting = Umbraco.TypedContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "GlobalSettings");
+
+    if (siteSetting != null && siteSetting.Id > 0 && siteSetting.Descendants("SiteDetails").Any())
+        {
+        var siteDetailsPage = siteSetting.Descendants("SiteDetails").FirstOrDefault();
+        if (siteDetailsPage != null && siteDetailsPage.Id > 0)
+            {
+            if (siteDetailsPage.GetPropertyValue<ArchetypeModel>("siteSpecialties") != null)
+                {
+                var specialityArchtype = siteDetailsPage.GetPropertyValue<ArchetypeModel>("siteSpecialties");
+                if (specialityArchtype.Fieldsets.Any())
+                    {
+                    var firstSection = specialityArchtype.First();
+                    if (!string.IsNullOrEmpty(firstSection.GetValue("image")))
+                        {
+                        var r = new Random();
+                        <div class="row">
+                            <div class="box">
+                                <div class="col-md-12">
+                                    <hr>
+                                    <h2 class="intro-text text-center">
+                                        Our Specialities includes...
+                                    </h2>
+                                    <hr>
+                                </div>
+                                @foreach (var fieldset in siteDetailsPage.GetPropertyValue<ArchetypeModel>("siteSpecialties").OrderBy(x => r.Next()).ToList())
+                                    {
+                                    var specialityHeading = fieldset.GetValue("heading");
+                                    var specialityImage = fieldset.GetValue("image");
+                                    var mediaItem = Umbraco.TypedMedia(specialityImage);
+                                    if (mediaItem != null && mediaItem.Id > 0)
+                                        {
+                                        var imageUrl = !string.IsNullOrEmpty(mediaItem.GetCropUrl("speciality")) ? mediaItem.GetCropUrl("speciality") : mediaItem.GetCropUrl(260, 130);
+                                        <div class="col-sm-3 text-center">
+                                            <img class="img-responsive img-full" src="@imageUrl" alt="@mediaItem.Name">
+                                            @if (!string.IsNullOrWhiteSpace(specialityHeading))
+                                                {
+                                                <h4>
+                                                    @specialityHeading
+                                                </h4>
+                                                }
+                                        </div>
+                                        }
+                                    }
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        }
+                    }
+                }
+            }
+        }
 }

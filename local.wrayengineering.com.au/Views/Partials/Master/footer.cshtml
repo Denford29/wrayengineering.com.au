@@ -1,59 +1,61 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
-    <footer>
-        <div class="container">
-            <div class="row">
-                <h4 class="text-center">
-                    Contact us...
-                </h4>
-                <div class="clearfix"></div>
-                <div class="col-md-4">
-                    <p>
-                        Phone:
-                        <strong>(08) 8294 1897</strong>
-                    </p>
-                    <p>
-                        Email:
-                        <strong><a href="mailto:wrayeng@bigpond.com">wrayeng@bigpond.com</a></strong>
-                    </p>
-                    <p>
-                        Address:
-                        <strong>
-                            Unit 2/41 Byre Avenue
-                            <br>Somerton Park, SA
-                        </strong>
-                    </p>
-                    <p>Copyright &copy; Wray Engineering 2016</p>
-                </div>
-                <div class="col-md-8">
-                    <form role="form">
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <!--<label>Name</label>-->
-                                <input type="text" class="form-control" placeholder="Name">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <!--<label>Email Address</label>-->
-                                <input type="email" class="form-control" placeholder="Email Address">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <!--<label>Message</label>-->
-                                <textarea class="form-control" rows="6" placeholder="Message"></textarea>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <!--<label>Phone Number</label>-->
-                                    <input type="tel" class="form-control" placeholder="Phone Number">
-                                </div>
+    var siteDefaultName = "Wray Engineering Ltd ";
+    var siteAddress = "Unit 2/41 Byre Avenue ,Somerton Park, SA ";
+    var emailAddress = "wrayeng@bigpond.com";
+    var sitePhone = "(08) 8294 1897";
+    var siteSetting = Umbraco.TypedContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "GlobalSettings");
 
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-default">Submit</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+    if (siteSetting != null && siteSetting.Id > 0 && siteSetting.Descendants("SiteDetails").Any())
+        {
+        var siteDetailsPage = siteSetting.Descendants("SiteDetails").FirstOrDefault();
+        if (siteDetailsPage != null && siteDetailsPage.Id > 0)
+            {
+            if (siteDetailsPage.HasProperty("siteName") && siteDetailsPage.HasValue("siteName"))
+                {
+                siteDefaultName = siteDetailsPage.GetPropertyValue("siteName").ToString();
+                }
+            if (siteDetailsPage.HasProperty("siteAddress") && siteDetailsPage.HasValue("siteAddress"))
+                {
+                siteAddress = siteDetailsPage.GetPropertyValue("siteAddress").ToString();
+                }
+            if (siteDetailsPage.HasProperty("siteEmailAddress") && siteDetailsPage.HasValue("siteEmailAddress"))
+                {
+                emailAddress = siteDetailsPage.GetPropertyValue("siteEmailAddress").ToString();
+                }
+            if (siteDetailsPage.HasProperty("sitePhoneNumber") && siteDetailsPage.HasValue("sitePhoneNumber"))
+                {
+                sitePhone = siteDetailsPage.GetPropertyValue("sitePhoneNumber").ToString();
+                }
+            }
+        }
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <h4 class="text-center">
+                        Contact us...
+                    </h4>
+                    <div class="clearfix"></div>
+                    <div class="col-md-4">
+                        <p>
+                            Phone:
+                            <strong>@sitePhone</strong>
+                        </p>
+                        <p>
+                            Email:
+                            <strong><a href="mailto:@emailAddress">@emailAddress</a></strong>
+                        </p>
+                        <p>
+                            Address:
+                            <strong>
+                                @siteAddress
+                            </strong>
+                        </p>
+                        <p>Copyright &copy; @siteDefaultName @DateTime.UtcNow.Year</p>
+                    </div>
+
+                <div class="col-md-8">
+                    @Html.Action("GetContactForm", "ContactSurface")
                 </div>
             </div>
         </div>

@@ -339,6 +339,8 @@
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Umbraco\assets\fonts\helveticons\helveticons.eot" />
     <Content Include="Umbraco\assets\fonts\helveticons\helveticons.ttf" />
     <Content Include="Umbraco\assets\fonts\helveticons\helveticons.woff" />
@@ -484,6 +486,8 @@
     <Content Include="Views\Partials\Master\MainNavigation.cshtml" />
     <Content Include="Views\Partials\Master\Specialities.cshtml" />
     <Content Include="Views\Partials\Master\HeaderContent.cshtml" />
+    <Content Include="Views\Partials\Master\Facebook.cshtml" />
+    <Content Include="Views\Partials\Contact\Form.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3042,6 +3046,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ContactSurfaceController.cs" />
+    <Compile Include="Models\ContactModel.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
