@@ -219,6 +219,10 @@ footer p {
     width: 100% !important;
 }
 
+.map {
+    height: 500px;
+}
+
 @media (min-width: 993px) and (max-width: 1200px) {
     hr {
         margin-bottom: 15px;

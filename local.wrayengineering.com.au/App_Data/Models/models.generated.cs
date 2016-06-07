@@ -18,7 +18,7 @@ using Umbraco.Web;
 using Umbraco.ModelsBuilder;
 using Umbraco.ModelsBuilder.Umbraco;
 
-[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.5")]
+[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.4")]
 
 namespace Umbraco.Web.PublishedContentModels
 {
@@ -372,6 +372,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Contact, TValue>> selector)
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Location Map: Set the google maps location to be used by the page.
+		///</summary>
+		[ImplementPropertyType("locationMap")]
+		public object LocationMap
+		{
+			get { return this.GetPropertyValue("locationMap"); }
 		}
 	}
 

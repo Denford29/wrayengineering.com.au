@@ -20,13 +20,13 @@
                         <hr>
                     </div>
 
-                    <div class="col-md-7">
+                    <div class="col-md-8">
                         @if (Model.Content.HasProperty("bodyText") && Model.Content.HasValue("bodyText"))
                             {
                                 @Html.Raw(Model.Content.GetPropertyValue("bodyText"))
                             }
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         @Html.Partial("Master/Facebook")
                     </div>
             </div>

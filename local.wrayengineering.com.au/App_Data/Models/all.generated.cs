@@ -387,6 +387,15 @@ namespace Umbraco.Web.PublishedContentModels
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
 		}
+
+		///<summary>
+		/// Location Map: Set the google maps location to be used by the page.
+		///</summary>
+		[ImplementPropertyType("locationMap")]
+		public object LocationMap
+		{
+			get { return this.GetPropertyValue("locationMap"); }
+		}
 	}
 
 	/// <summary>Site Details</summary>

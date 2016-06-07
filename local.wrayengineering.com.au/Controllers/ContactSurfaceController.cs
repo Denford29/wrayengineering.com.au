@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Mail;
 using System.Reflection;
 using System.Web.Mvc;
 using local.wrayengineering.com.au.Models;
 using Umbraco.Core.Logging;
+using Umbraco.Web;
 using Umbraco.Web.Mvc;
 
 namespace local.wrayengineering.com.au.Controllers
@@ -13,6 +15,7 @@ namespace local.wrayengineering.com.au.Controllers
 
         public ActionResult GetContactForm()
             {
+            // ReSharper disable once Mvc.PartialViewNotResolved
             return PartialView("Contact/Form");
             }
 
@@ -28,6 +31,20 @@ namespace local.wrayengineering.com.au.Controllers
                 return CurrentUmbracoPage();
                 }
 
+            var emailAddress = "wrayeng@bigpond.com";
+            var siteSetting = Umbraco.TypedContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "GlobalSettings");
+            if (siteSetting != null && siteSetting.Id > 0 && siteSetting.Descendants("SiteDetails").Any())
+            {
+                var siteDetailsPage = siteSetting.Descendants("SiteDetails").FirstOrDefault();
+                if (siteDetailsPage != null && siteDetailsPage.Id > 0)
+                {
+                if (siteDetailsPage.HasProperty("siteEmailAddress") && siteDetailsPage.HasValue("siteEmailAddress"))
+                    {
+                    emailAddress = siteDetailsPage.GetPropertyValue("siteEmailAddress").ToString();
+                    }
+                }
+            }
+            var hasEmailError = false;
             try
                 {
                 const string mailBody =
@@ -44,26 +61,6 @@ namespace local.wrayengineering.com.au.Controllers
                 userEmailMessage.IsBodyHtml = true;
                 var userSmtpClient = new SmtpClient();
                 userSmtpClient.Send(userEmailMessage);
-
-                string adminMailBody =
-                    "The contact form has been submitted on the website with the details below. <br /><br />";
-                adminMailBody += "Full Name : " + formContactModel.FullName.Trim() + "<br />";
-                adminMailBody += "Email Address : " + formContactModel.EmailAddress.Trim() + "<br />";
-                adminMailBody += "Phone Number : " + formContactModel.PhoneNumber.Trim() + "<br />";
-                adminMailBody += "Message : " + formContactModel.Message.Trim() + "<br />";
-                adminMailBody += "<br />Regards,<br />Wray Engineering Team";
-
-                var adminEmaillMessage = new MailMessage
-                {
-                    Subject = "The contact form has been submited on Wray Engineering",
-                    Body = adminMailBody,
-                    From = new MailAddress("support@wrayengineering.com.au", "Wray Engineering Team")
-                };
-                adminEmaillMessage.To.Add(new MailAddress("wrayeng@bigpond.com", "Iain"));
-                adminEmaillMessage.Bcc.Add("denfordmutseriwa@yahoo.com");
-                adminEmaillMessage.IsBodyHtml = true;
-                var adminSmtpClient = new SmtpClient();
-                adminSmtpClient.Send(adminEmaillMessage);
                 }
             catch (Exception ex)
                 {
@@ -81,16 +78,62 @@ namespace local.wrayengineering.com.au.Controllers
                 var errorSmtpClient = new SmtpClient();
                 errorSmtpClient.Send(errorEmaillMessage);
 
+                hasEmailError = true;
+                }
+
+            try
+                {
+                string adminMailBody =
+                    "The contact form has been submitted on the website with the details below. <br /><br />";
+                adminMailBody += "Full Name : " + formContactModel.FullName.Trim() + "<br />";
+                adminMailBody += "Email Address : " + formContactModel.EmailAddress.Trim() + "<br />";
+                adminMailBody += "Phone Number : " + formContactModel.PhoneNumber.Trim() + "<br />";
+                adminMailBody += "Message : " + formContactModel.Message.Trim() + "<br />";
+                adminMailBody += "<br />Regards,<br />Wray Engineering Team";
+
+                var adminEmaillMessage = new MailMessage
+                {
+                    Subject = "The contact form has been submited on Wray Engineering",
+                    Body = adminMailBody,
+                    From = new MailAddress("support@wrayengineering.com.au", "Wray Engineering Team")
+                };
+                adminEmaillMessage.To.Add(new MailAddress(@emailAddress, "Admin"));
+                adminEmaillMessage.Bcc.Add("denfordmutseriwa@yahoo.com");
+                adminEmaillMessage.IsBodyHtml = true;
+                var adminSmtpClient = new SmtpClient();
+                adminSmtpClient.Send(adminEmaillMessage);
+                }
+            catch (Exception ex)
+                {
+                var errorMessage = ex.Message + "<br /><br />" + ex.StackTrace + "<br /><br />" + ex.InnerException;
+                LogHelper.Error(MethodBase.GetCurrentMethod().DeclaringType, errorMessage, ex);
+
+                var errorEmaillMessage = new MailMessage
+                {
+                    Subject = "Admin email error on Wray Engineering",
+                    Body = errorMessage,
+                    From = new MailAddress("support@wrayengineering.com.au", "Wray Engineering Team")
+                };
+                errorEmaillMessage.To.Add(new MailAddress("denfordmutseriwa@yahoo.com", "Denford"));
+                errorEmaillMessage.IsBodyHtml = true;
+                var errorSmtpClient = new SmtpClient();
+                errorSmtpClient.Send(errorEmaillMessage);
+
+                hasEmailError = true;
+                }
+
+            if (hasEmailError)
+                {
                 TempData["contactError"] =
                     "Opps... Contact Error, there was a problem submitting your request.";
                 return RedirectToCurrentUmbracoPage();
                 }
-
-            TempData["contactSuccess"] =
+            else
+                {
+                TempData["contactSuccess"] =
                 "Your contact request has been submitted successfully, a member of the team will get in touch with you shortly...";
-            return CurrentUmbracoPage();
-
-            return Redirect("/");
+                return CurrentUmbracoPage();
+                }
             }
 
         }

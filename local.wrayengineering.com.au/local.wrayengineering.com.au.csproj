@@ -338,9 +338,12 @@
     <Content Include="Images\wray_engineering_Home3.jpg" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\html5shiv.min.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\SiteScripts.js" />
     <Content Include="Umbraco\assets\fonts\helveticons\helveticons.eot" />
     <Content Include="Umbraco\assets\fonts\helveticons\helveticons.ttf" />
     <Content Include="Umbraco\assets\fonts\helveticons\helveticons.woff" />
@@ -488,6 +491,9 @@
     <Content Include="Views\Partials\Master\HeaderContent.cshtml" />
     <Content Include="Views\Partials\Master\Facebook.cshtml" />
     <Content Include="Views\Partials\Contact\Form.cshtml" />
+    <Content Include="Views\Partials\Master\HeadingImage.cshtml" />
+    <Content Include="App_Code\pagingtemplate.cshtml" />
+    <Content Include="Views\Partials\Contact\LocationMap.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3046,6 +3052,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\GMapsLocation.cs" />
+    <Content Include="App_Code\GMapsValueConverter.cs" />
+    <Content Include="App_Code\paging.cs" />
     <Compile Include="Controllers\ContactSurfaceController.cs" />
     <Compile Include="Models\ContactModel.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
